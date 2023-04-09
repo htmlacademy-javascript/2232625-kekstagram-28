@@ -45,3 +45,5 @@ const padStart = (string, minLength, pad) => {
   return result;
 };
 padStart('', 1, '');
+
+export {checkString, isPalindrom, extractNumber, padStart};
