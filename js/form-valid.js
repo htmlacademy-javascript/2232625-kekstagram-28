@@ -1,5 +1,5 @@
-import { isEscKey } from './util.js';
-import { checkStringLength } from './util.js';
+import { EscKey } from './utilites.js';
+import { checkString } from './utilites.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const formModal = document.querySelector('.img-upload__overlay');
@@ -12,7 +12,7 @@ const scaleValue = formModal.querySelector('.scale__control--value');
 const HASHTAG_AMOUNT = 5;
 
 function onEscClose (evt) {
-  if (isEscKey(evt)) {
+  if (EscKey(evt)) {
     closeForm();
   }
 }
@@ -65,7 +65,7 @@ const pristine = new Pristine(form, {
   errorTextParent: 'img-upload__field-wrapper'
 });
 
-pristine.addValidator(descriptionInput, checkStringLength, 'До 140 символов');
+pristine.addValidator(descriptionInput, checkString, 'До 140 символов');
 pristine.addValidator(hashtagInput, validateHashtag, 'Проверьте правильность введённых данных');
 
 const onSubmitValidate = (evt) => {
