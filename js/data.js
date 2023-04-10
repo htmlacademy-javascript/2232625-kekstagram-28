@@ -23,7 +23,7 @@ const AVATAR_MIN_RANGE = 1;
 const AVATAR_MAX_RANGE = 6;
 const LIKES_MIN = 15;
 const LIKES_MAX = 200;
-const COMMENTS_AMOUNT = 3;
+const COMMENTS_AMOUNT = 8;
 const DESCRIPTION_AMOUNT = 25;
 
 function getUniqueRangeInt(min = 0, max) {
@@ -54,8 +54,8 @@ const getCommentID = getUniqueRangeInt();
 
 const generateComments = () => ({
   id: getCommentID(),
-  avatar: `img/avatar-${getRandomInt(AVATAR_MIN_RANGE, AVATAR_MAX_RANGE)}.svg`,
-  message : messageList[getRandomInt(0, messageList.length - 1)],
+  avatar: `../img/avatar-${getRandomInt(AVATAR_MIN_RANGE, AVATAR_MAX_RANGE)}.svg`,
+  message: messageList[getRandomInt(0, messageList.length - 1)],
   name: authorList[getRandomInt(0, messageList.length - 1)],
 });
 
@@ -67,6 +67,6 @@ const generateDescription = () => ({
   comments: Array.from({length: COMMENTS_AMOUNT}, generateComments)
 });
 
-const photoDescription = Array.from({length: DESCRIPTION_AMOUNT}, generateDescription); // eslint-disable-line
+const photoDescription = Array.from({length: DESCRIPTION_AMOUNT}, generateDescription);
 
 export {photoDescription};

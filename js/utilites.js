@@ -46,4 +46,8 @@ const padStart = (string, minLength, pad) => {
 };
 padStart('', 1, '');
 
-export {checkString, isPalindrom, extractNumber, padStart};
+const EscKey = (evt) => evt.key === 'Escape';
+
+const EnterKey = (evt) => evt.key === 'Enter';
+
+export {checkString, isPalindrom, extractNumber, padStart, EscKey, EnterKey};
