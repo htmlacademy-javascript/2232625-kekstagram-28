@@ -1,6 +1,6 @@
 //Функция для проверки длины строки
 
-const checkString = (string, length) => string.length <= length;
+const checkString = (string) => string.length <= 140;
 checkString('', 1);
 //Функция для проверки, является ли строка палиндромом
 
