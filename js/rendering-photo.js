@@ -1,5 +1,5 @@
 import { photoDescriptions } from './data.js';
-import { isEnterKey, isEscKey } from './util.js';
+import { EnterKey, EscKey } from './utilites.js';
 
 const picturesList = document.querySelector('.pictures');
 const fullInterface = document.querySelector('.big-picture');
@@ -67,13 +67,13 @@ const closeFull = function () {
   picturesList.addEventListener('keydown', onEnterOpen);
 };
 function onEscClose(evt) {
-  if (isEscKey(evt)) {
+  if (EscKey(evt)) {
     closeFull();
   }
 }
 
 function onEnterOpen(evt) {
-  if (isEnterKey(evt)) {
+  if (EnterKey(evt)) {
     openFull(evt.target.dataset.id - 1);
   }
 
