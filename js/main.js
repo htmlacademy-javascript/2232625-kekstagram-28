@@ -1,3 +1,4 @@
 import './data.js';
 import './utilites.js';
-import './renders.js';
+import './rendering-preview.js';
+import './rendering-photo.js';
