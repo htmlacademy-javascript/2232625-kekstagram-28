@@ -1,6 +1,8 @@
-import { generateUniqueNumbersArr } from './data.js';
+import { generateUniqueNumbersArr } from './utilites.js';
 import { descendingCommentsOrder, debounce } from './utilites.js';
 
+const MAX_NUMBER = 24;
+const PHOTO_AMOUNT = 10;
 const photoTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
@@ -8,6 +10,17 @@ const photoTemplate = document.querySelector('#picture')
 const filterContainer = document.querySelector('.img-filters');
 
 const photoContainer = document.querySelector('.pictures');
+
+const createPreview = (preview, fragment) => {
+  const photo = photoTemplate.cloneNode(true);
+  photo.querySelector('.picture__img').src = `../${preview.url}`;
+  photo.querySelector('.picture__comments').textContent = preview.comments.length;
+  photo.querySelector('.picture__likes').textContent = preview.likes;
+  const dataAttr = document.createAttribute('data-id');
+  photo.setAttributeNode(dataAttr);
+  photo.dataset.id = preview.id;
+  fragment.append(photo);
+};
 
 const generatePreviews = (previewsList) => {
   const picturePreviewsList = photoContainer.querySelectorAll('.picture');
@@ -20,16 +33,7 @@ const generatePreviews = (previewsList) => {
 
   const photoFragment = document.createDocumentFragment();
 
-  previewsList.forEach((preview) => {
-    const photo = photoTemplate.cloneNode(true);
-    photo.querySelector('.picture__img').src = `../${preview.url}`;
-    photo.querySelector('.picture__comments').textContent = preview.comments.length;
-    photo.querySelector('.picture__likes').textContent = preview.likes;
-    const dataAttr = document.createAttribute('data-id');
-    photo.setAttributeNode(dataAttr);
-    photo.dataset.id = preview.id;
-    photoFragment.append(photo);
-  });
+  previewsList.forEach((preview) => createPreview(preview, photoFragment));
 
   photoContainer.append(photoFragment);
 };
@@ -41,7 +45,7 @@ const sortPhotos = (data, sortId) => {
       break;
     case 'filter-random': {
       const uniquePhotos = [];
-      generateUniqueNumbersArr(24, 10).forEach((id) => {
+      generateUniqueNumbersArr(MAX_NUMBER, PHOTO_AMOUNT).forEach((id) => {
         for (let i = 0; i < data.length; i++) {
           if (data[i].id === id) {
             uniquePhotos.push(data[i]);

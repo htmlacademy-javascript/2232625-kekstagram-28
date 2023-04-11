@@ -2,30 +2,6 @@
 const checkString = (string) => string.length <= 140;
 checkString('', 1);
 
-const isPalindrom = (string) => {
-  const tempString = string.toLowerCase().replaceAll(' ', '');
-
-  let reverseString = ' ';
-  for (let i = tempString.length - 1; i >= 0; i--) {
-    reverseString += tempString.at(i);
-  }
-
-  return tempString === reverseString;
-};
-isPalindrom('');
-
-const extractNumber = (string) => {
-  let result = '';
-
-  for (let i = 0; i < string.length; i++) {
-    if (!Number.isNaN(parseInt(string.at(i), 10))) {
-      result += string.at(i);
-    }
-  }
-
-  return parseInt(result, 10);
-};
-extractNumber('');
 const descendingCommentsOrder = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
 const padStart = (string, minLength, pad) => {
@@ -42,17 +18,28 @@ const padStart = (string, minLength, pad) => {
 };
 padStart('', 1, '');
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
+
+const generateUniqueNumbersArr = (max, arrLength) => {
+  const uniqueNumbers = [];
+  while(uniqueNumbers.length < arrLength){
+    const r = Math.floor(Math.random() * max) + 1;
+    if(uniqueNumbers.indexOf(r) === -1) {
+      uniqueNumbers.push(r);
+    }
+  }
+  return uniqueNumbers;
+};
 
 const EscKey = (evt) => evt.key === 'Escape';
 
 const EnterKey = (evt) => evt.key === 'Enter';
 
-export {checkString, isPalindrom, extractNumber, padStart, EscKey, EnterKey, descendingCommentsOrder, debounce};
+export {checkString, padStart, EscKey, EnterKey, descendingCommentsOrder, debounce, generateUniqueNumbersArr};

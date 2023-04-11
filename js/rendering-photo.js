@@ -11,7 +11,7 @@ let currentFullPhoto;
 
 let currentCommentPage = 0;
 
-const generateComments = function (index, commentIndex, data) {
+const generateComments = (index, commentIndex, data) => {
   const documentFragment = document.createDocumentFragment();
   const newComment = document.createElement('li');
   const newCommentAvatar = document.createElement('img');
@@ -31,7 +31,7 @@ const generateComments = function (index, commentIndex, data) {
   commentBlock.appendChild(documentFragment);
 };
 
-const loadComments = function () {
+const loadComments = () => {
   const commentsAddAmount = 5;
   const commentsAmount = photoData[currentFullPhoto].comments.length;
   const commentsList = commentBlock.children;
@@ -55,33 +55,6 @@ const loadComments = function () {
   currentCommentPage++;
 };
 
-const closeFull = function () {
-  fullInterface.classList.add('hidden');
-  commentBlock.innerHTML = '';
-  currentCommentPage = 0;
-  commentsLoaderButton.classList.remove('hidden');
-  document.body.classList.remove('modal-open');
-  closeButton.removeEventListener('click', () => {
-    closeFull();
-  });
-  picturesList.addEventListener('click', onPreviewClick);
-  document.removeEventListener('keydown', onEscClose);
-  picturesList.addEventListener('keydown', onEnterOpen);
-  commentsLoaderButton.removeEventListener('click', loadComments);
-};
-function onEscClose(evt) {
-  if (EscKey(evt)) {
-    closeFull();
-  }
-}
-
-function onEnterOpen(evt) {
-  if (EnterKey(evt)) {
-    openFull(evt.target.dataset.id - 1);
-  }
-
-}
-
 const generateFull = (data, index) => {
   const img = fullInterface.querySelector('.big-picture__img img');
   const likes = fullInterface.querySelector('.likes-count');
@@ -97,7 +70,22 @@ const generateFull = (data, index) => {
   commentsLoaderButton.addEventListener('click', loadComments);
 };
 
-function openFull (index) {
+const closeFull = () => {
+  fullInterface.classList.add('hidden');
+  commentBlock.innerHTML = '';
+  currentCommentPage = 0;
+  commentsLoaderButton.classList.remove('hidden');
+  document.body.classList.remove('modal-open');
+  closeButton.removeEventListener('click', () => {
+    closeFull();
+  });
+  picturesList.addEventListener('click', onPreviewClick);
+  document.removeEventListener('keydown', onEscClose);
+  picturesList.addEventListener('keydown', onEnterOpen);
+  commentsLoaderButton.removeEventListener('click', loadComments);
+};
+
+const openFull = (index) => {
   getData()
     .then((data) => {
       photoData = data;
@@ -115,6 +103,18 @@ function openFull (index) {
       generateErrorMessage(err.message);
       picturesList.addEventListener('click', onPreviewClick);
     });
+};
+
+function onEscClose (evt) {
+  if (EscKey(evt)) {
+    closeFull();
+  }
+}
+
+function onEnterOpen (evt) {
+  if (EnterKey(evt)) {
+    openFull(evt.target.dataset.id - 1);
+  }
 }
 
 function onPreviewClick(evt) {
