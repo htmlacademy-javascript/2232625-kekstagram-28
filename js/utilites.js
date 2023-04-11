@@ -1,8 +1,6 @@
-//Функция для проверки длины строки
 
 const checkString = (string) => string.length <= 140;
 checkString('', 1);
-//Функция для проверки, является ли строка палиндромом
 
 const isPalindrom = (string) => {
   const tempString = string.toLowerCase().replaceAll(' ', '');
@@ -15,7 +13,6 @@ const isPalindrom = (string) => {
   return tempString === reverseString;
 };
 isPalindrom('');
-//Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа
 
 const extractNumber = (string) => {
   let result = '';
@@ -29,8 +26,7 @@ const extractNumber = (string) => {
   return parseInt(result, 10);
 };
 extractNumber('');
-
-//Функция, которая принимает три параметра: исходную строку, минимальную длину и строку с добавочными символами — и возвращает исходную строку, дополненную указанными символами до заданной длины.
+const descendingCommentsOrder = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
 const padStart = (string, minLength, pad) => {
   const result = string;
@@ -46,8 +42,17 @@ const padStart = (string, minLength, pad) => {
 };
 padStart('', 1, '');
 
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
 const EscKey = (evt) => evt.key === 'Escape';
 
 const EnterKey = (evt) => evt.key === 'Enter';
 
-export {checkString, isPalindrom, extractNumber, padStart, EscKey, EnterKey};
+export {checkString, isPalindrom, extractNumber, padStart, EscKey, EnterKey, descendingCommentsOrder, debounce};

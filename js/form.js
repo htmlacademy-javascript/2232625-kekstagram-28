@@ -3,6 +3,7 @@ import { checkString } from './utilites.js';
 import { sendData } from './server.js';
 
 const HASHTAG_AMOUNT = 5;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const uploadInput = document.querySelector('#upload-file');
 const formModal = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('#upload-select-image');
@@ -14,6 +15,7 @@ const scaleValue = formModal.querySelector('.scale__control--value');
 const decreaseScaleButton = formModal.querySelector('.scale__control--smaller');
 const increaseScaleButton = formModal.querySelector('.scale__control--bigger');
 const imagePreview = formModal.querySelector('.img-upload__preview img');
+const fileChooser = document.querySelector('.img-upload__input');
 const effectsList = formModal.querySelector('.effects__list');
 const sliderContainer = formModal.querySelector('.effect-level');
 const slider = formModal.querySelector('.effect-level__slider');
@@ -136,6 +138,7 @@ const changeEffectIntensity = (applyingEffect) => {
       slider.noUiSlider.off();
       slider.noUiSlider.on('update', () => {
         effectLevel.value = slider.noUiSlider.get();
+        imagePreview.style.filter = '';
         imagePreview.style.filter = `grayscale(${effectLevel.value})`;
       });
       break;
@@ -151,6 +154,7 @@ const changeEffectIntensity = (applyingEffect) => {
       slider.noUiSlider.off();
       slider.noUiSlider.on('update', () => {
         effectLevel.value = slider.noUiSlider.get();
+        imagePreview.style.filter = '';
         imagePreview.style.filter = `sepia(${effectLevel.value})`;
       });
       break;
@@ -166,6 +170,7 @@ const changeEffectIntensity = (applyingEffect) => {
       slider.noUiSlider.off();
       slider.noUiSlider.on('update', () => {
         effectLevel.value = slider.noUiSlider.get();
+        imagePreview.style.filter = '';
         imagePreview.style.filter = `invert(${effectLevel.value}%)`;
       });
       break;
@@ -181,6 +186,7 @@ const changeEffectIntensity = (applyingEffect) => {
       slider.noUiSlider.off();
       slider.noUiSlider.on('update', () => {
         effectLevel.value = slider.noUiSlider.get();
+        imagePreview.style.filter = '';
         imagePreview.style.filter = `blur(${effectLevel.value}px)`;
       });
       break;
@@ -196,8 +202,13 @@ const changeEffectIntensity = (applyingEffect) => {
       slider.noUiSlider.off();
       slider.noUiSlider.on('update', () => {
         effectLevel.value = slider.noUiSlider.get();
+        imagePreview.style.filter = '';
         imagePreview.style.filter = `brightness(${effectLevel.value})`;
       });
+      break;
+    case 'effects__preview--none':
+      slider.noUiSlider.off();
+      imagePreview.style.filter = '';
       break;
     default:
       break;
@@ -264,6 +275,12 @@ function openForm () {
   hashtagInput.addEventListener('keydown', onEscStay);
   decreaseScaleButton.addEventListener('click', onClickDecrease);
   increaseScaleButton.addEventListener('click', onClickIncrease);
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    imagePreview.src = URL.createObjectURL(file);
+  }
   sliderContainer.classList.add('hidden');
   noUiSlider.create(slider, {
     range: {
@@ -299,6 +316,7 @@ function closeForm () {
   hashtagInput.value = '';
   effectDefault.checked = true;
   scaleValue.value = '100%';
+  imagePreview.src = 'img/upload-default-image.jpg';
   decreaseScaleButton.removeEventListener('click', onClickDecrease);
   increaseScaleButton.removeEventListener('click', onClickIncrease);
   effectsList.removeEventListener('click', onClickApplyEffect);
