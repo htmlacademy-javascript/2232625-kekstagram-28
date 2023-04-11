@@ -47,8 +47,8 @@ const getEffect = (arr) => {
       if (arr[i].includes(effects[j])) {
         return arr[i];
       }
-      }
     }
+  }
 };
 
 function onClickCloseSuccess () {
