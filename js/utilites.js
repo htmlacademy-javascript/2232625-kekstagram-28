@@ -1,22 +1,7 @@
 
 const checkString = (string) => string.length <= 140;
-checkString('', 1);
 
 const descendingCommentsOrder = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
-
-const padStart = (string, minLength, pad) => {
-  const result = string;
-  while (result.length < minLength) {
-    const newResultLength = result.length + pad.length;
-    const actualPad =
-      newResultLength <= minLength
-        ? pad
-        : pad.slice(0, minLength - newResultLength);
-    actualPad();
-  }
-  return result;
-};
-padStart('', 1, '');
 
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
