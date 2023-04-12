@@ -27,4 +27,4 @@ const EscKey = (evt) => evt.key === 'Escape';
 
 const EnterKey = (evt) => evt.key === 'Enter';
 
-export {checkString, padStart, EscKey, EnterKey, descendingCommentsOrder, debounce, generateUniqueNumbersArr};
+export {checkString, EscKey, EnterKey, descendingCommentsOrder, debounce, generateUniqueNumbersArr};
