@@ -1,3 +1,4 @@
+const TIMEOUT = 3000;
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -50,7 +51,7 @@ const generateErrorMessage = (message) => {
   errorText.textContent = message;
   setTimeout(() => {
     errorContainer.style.display = 'none';
-  }, 3000);
+  }, TIMEOUT);
 };
 
 const load = (route, errorText, method = Method.GET, body = null) =>
