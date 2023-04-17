@@ -2,6 +2,8 @@ import { checkEscKey } from './utilites.js';
 import { checkString } from './utilites.js';
 import { sendData } from './server.js';
 
+const PERCENT_MIN = 25;
+const PERCENT_MAX = 100;
 const HASHTAG_AMOUNT = 5;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const uploadInput = document.querySelector('#upload-file');
@@ -256,18 +258,18 @@ const validateHashtag = (value) => {
 };
 
 const onClickDecrease = () => {
-  if (scaleValue.value !== '25%') {
-    const newScale = Number(scaleValue.value.slice(0, -1)) - 25;
+  if (scaleValue.value !== `${PERCENT_MIN}%`) {
+    const newScale = Number(scaleValue.value.slice(0, -1)) - PERCENT_MIN;
     scaleValue.value = `${newScale}%`;
-    imagePreview.style.transform = `scale(${newScale / 100}, ${newScale / 100})`;
+    imagePreview.style.transform = `scale(${newScale / PERCENT_MAX}, ${newScale / PERCENT_MAX})`;
   }
 };
 
 const onClickIncrease = () => {
-  if (scaleValue.value !== '100%') {
-    const newScale = Number(scaleValue.value.slice(0, -1)) + 25;
+  if (scaleValue.value !== `${PERCENT_MAX}%`) {
+    const newScale = Number(scaleValue.value.slice(0, -1)) + PERCENT_MIN;
     scaleValue.value = `${newScale}%`;
-    imagePreview.style.transform = `scale(${newScale / 100}, ${newScale / 100})`;
+    imagePreview.style.transform = `scale(${newScale / PERCENT_MAX}, ${newScale / PERCENT_MAX})`;
   }
 };
 

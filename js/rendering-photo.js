@@ -1,6 +1,7 @@
 import { getData, generateErrorMessage } from './server.js';
 import { checkEnterKey, checkEscKey } from './utilites.js';
 
+const COMMENTS_ADD = 5;
 const picturesList = document.querySelector('.pictures');
 const fullInterface = document.querySelector('.big-picture');
 const closeButton = fullInterface.querySelector('.big-picture__cancel');
@@ -32,7 +33,7 @@ const generateComments = (index, commentIndex, data) => {
 };
 
 const loadComments = () => {
-  const commentsAddAmount = 5;
+  const commentsAddAmount = COMMENTS_ADD;
   const commentsAmount = photoData[currentFullPhoto].comments.length;
   const commentsList = commentBlock.children;
   const startRange = currentCommentPage * commentsAddAmount;
