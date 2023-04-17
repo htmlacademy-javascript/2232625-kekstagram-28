@@ -1,5 +1,5 @@
 import { getData, generateErrorMessage } from './server.js';
-import { EnterKey, EscKey } from './utilites.js';
+import { checkEnterKey, checkEscKey } from './utilites.js';
 
 const picturesList = document.querySelector('.pictures');
 const fullInterface = document.querySelector('.big-picture');
@@ -106,13 +106,13 @@ const openFull = (index) => {
 };
 
 function onEscClose (evt) {
-  if (EscKey(evt)) {
+  if (checkEscKey(evt)) {
     closeFull();
   }
 }
 
 function onEnterOpen (evt) {
-  if (EnterKey(evt)) {
+  if (checkEnterKey(evt)) {
     openFull(evt.target.dataset.id - 1);
   }
 }

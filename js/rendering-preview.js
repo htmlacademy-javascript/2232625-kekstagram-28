@@ -1,7 +1,5 @@
-import { generateUniqueNumbersArr } from './utilites.js';
-import { descendingCommentsOrder, debounce } from './utilites.js';
+import { doDescendingCommentsOrder, debounce } from './utilites.js';
 
-const MAX_NUMBER = 24;
 const PHOTO_AMOUNT = 10;
 const photoTemplate = document.querySelector('#picture')
   .content
@@ -38,28 +36,24 @@ const generatePreviews = (previewsList) => {
   photoContainer.append(photoFragment);
 };
 
+const doRandomOrders = () => Math.random() - 0.5;
+
 const sortPhotos = (data, sortId) => {
   switch (sortId) {
     case 'filter-default':
       generatePreviews(data);
       break;
     case 'filter-random': {
-      const uniquePhotos = [];
-      generateUniqueNumbersArr(MAX_NUMBER, PHOTO_AMOUNT).forEach((id) => {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].id === id) {
-            uniquePhotos.push(data[i]);
-            return;
-          }
-        }
-      });
-      generatePreviews(uniquePhotos);
+      generatePreviews(data
+        .slice()
+        .sort(doRandomOrders)
+        .slice(0, PHOTO_AMOUNT));
       break;
     }
     case 'filter-discussed': {
       generatePreviews(data
         .slice()
-        .sort(descendingCommentsOrder));
+        .sort(doDescendingCommentsOrder));
       break;
     }
     default:

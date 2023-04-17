@@ -1,4 +1,4 @@
-import { EscKey } from './utilites.js';
+import { checkEscKey } from './utilites.js';
 import { checkString } from './utilites.js';
 import { sendData } from './server.js';
 
@@ -50,7 +50,7 @@ const getEffect = (arr) => {
 };
 
 const onEscClose = (evt) => {
-  if (EscKey(evt)) {
+  if (checkEscKey(evt)) {
     closeForm();
   }
 };
@@ -83,7 +83,7 @@ function onClickCloseError () {
 }
 
 function onEscCloseSuccess (evt) {
-  if (EscKey(evt)) {
+  if (checkEscKey(evt)) {
     document.querySelector('.success').remove();
     successButton.removeEventListener('click', onClickCloseSuccess);
     document.removeEventListener('keydown', onEscCloseSuccess);
@@ -92,7 +92,7 @@ function onEscCloseSuccess (evt) {
 }
 
 function onEscCloseError (evt) {
-  if (EscKey(evt)) {
+  if (checkEscKey(evt)) {
     document.querySelector('.error').remove();
     errorButton.removeEventListener('click', onClickCloseError);
     errorButton.removeEventListener('keydown', onEscCloseError);
@@ -248,7 +248,7 @@ const isUniqueElement = (array) => {
 
 const validateHashtag = (value) => {
   const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-  const hashtagList = value.trim().split(' ');
+  const hashtagList = value.trim().split(' ').filter((s) => s.length > 0);
   if (value === '') {
     return true;
   }

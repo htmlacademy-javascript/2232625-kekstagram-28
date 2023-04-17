@@ -1,7 +1,7 @@
 
 const checkString = (string) => string.length <= 140;
 
-const descendingCommentsOrder = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
+const doDescendingCommentsOrder = (photoA, photoB) => photoB.comments.length - photoA.comments.length;
 
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
@@ -12,19 +12,8 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-const generateUniqueNumbersArr = (max, arrLength) => {
-  const uniqueNumbers = [];
-  while(uniqueNumbers.length < arrLength){
-    const r = Math.floor(Math.random() * max) + 1;
-    if(uniqueNumbers.indexOf(r) === -1) {
-      uniqueNumbers.push(r);
-    }
-  }
-  return uniqueNumbers;
-};
+const checkEscKey = (evt) => evt.key === 'Escape';
 
-const EscKey = (evt) => evt.key === 'Escape';
+const checkEnterKey = (evt) => evt.key === 'Enter';
 
-const EnterKey = (evt) => evt.key === 'Enter';
-
-export {checkString, EscKey, EnterKey, descendingCommentsOrder, debounce, generateUniqueNumbersArr};
+export {checkString, checkEscKey, checkEnterKey, doDescendingCommentsOrder, debounce};
